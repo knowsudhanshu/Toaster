@@ -47,12 +47,11 @@ open class ToastView: UIView {
   /// The bottom offset from the screen's bottom in portrait mode.
   @objc open dynamic var bottomOffsetPortrait: CGFloat = {
     switch UIDevice.current.userInterfaceIdiom {
-    // specific values
     case .phone: return 30
     case .pad: return 60
     case .tv: return 90
     case .carPlay: return 30
-    // default values
+    case .mac: return 60
     case .unspecified: fallthrough
     @unknown default: return 30
     }
@@ -61,12 +60,11 @@ open class ToastView: UIView {
   /// The bottom offset from the screen's bottom in landscape mode.
   @objc open dynamic var bottomOffsetLandscape: CGFloat = {
     switch UIDevice.current.userInterfaceIdiom {
-    // specific values
     case .phone: return 20
     case .pad: return 40
     case .tv: return 60
     case .carPlay: return 20
-    // default values
+    case .mac: return 40
     case .unspecified: fallthrough
     @unknown default: return 20
     }
@@ -127,14 +125,14 @@ open class ToastView: UIView {
     self.backgroundColor = .clear
     self.font = {
       switch UIDevice.current.userInterfaceIdiom {
-      // specific values
       case .phone: return .systemFont(ofSize: 12)
       case .pad: return .systemFont(ofSize: 16)
+      case .mac: return .systemFont(ofSize: 16)
       case .tv: return .systemFont(ofSize: 20)
       case .carPlay: return .systemFont(ofSize: 12)
-      // default values
       case .unspecified: fallthrough
-      @unknown default: return .systemFont(ofSize: 12)
+      @unknown default:
+        return .systemFont(ofSize: 16)
       }
     }()
     self.numberOfLines = 0
